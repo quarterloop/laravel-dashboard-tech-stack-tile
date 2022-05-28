@@ -22,7 +22,7 @@ class TechStackTileComponent extends Component
 
         return view('dashboard-tech-stack-tile::tile', [
             'website' => config('dashboard.tiles.tech_stack.url'),
-            'results' => $techStackStore->getData()['results'];
+            'results' => $techStackStore->getData()['results'],
         ]);
     }
 }
