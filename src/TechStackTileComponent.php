@@ -23,6 +23,8 @@ class TechStackTileComponent extends Component
         return view('dashboard-tech-stack-tile::tile', [
             'website' => config('dashboard.tiles.tech_stack.url'),
             'results' => $techStackStore->getData()['results'],
+            'lastUpdateTime'  => date('H:i:s', strtotime($techStackStore->getLastUpdateTime())),
+            'lastUpdateDate'  => date('d.m.Y', strtotime($techStackStore->getLastUpdateDate())),
         ]);
     }
 }
