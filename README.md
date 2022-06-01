@@ -10,16 +10,16 @@ This tile can be used on [the Laravel Dashboard](https://docs.spatie.be/laravel-
 You can install the package via composer:
 
 ```bash
-composer require quaterloop/laravel-dashboard-google-page-speed-tile
+composer require quarterloop/laravel-tech-stack-tile
 ```
 
 ## Usage
 
-In your dashboard view you use the `livewire:google-page-speed-tile` component.
+In your dashboard view you use the `livewire:tech-stack-tile` component.
 
 ```html
 <x-dashboard>
-    <livewire:google-page-speed-tile position="e7:e16" />
+    <livewire:tech-stack-tile position="a1:a1" />
 </x-dashboard>
 ```
 
@@ -27,12 +27,26 @@ In your dashboard view you use the `livewire:google-page-speed-tile` component.
 Use the php artisan command to fetch Page Speed data.
 
 ``` bash
-php artisan dashboard:fetch-google-page-speed-data
+php artisan dashboard:fetch-tech-stack-data
 ```
 
 Use this snippet to schedule the command in app/Console/Commands/Kernel.php
 ``` bash
-$schedule->command(\Quaterloop\GooglePageSpeedTile\Commands\FetchGooglePageSpeedCommand::class)->everyMinute();
+$schedule->command(\Quarterloop\TechStackTile\Commands\FetchTechStackCommand::class)->daily();
+```
+
+Also add the following code snippet in app/console/kernel.php under "$commands" in a new line:
+``` bash
+\Quarterloop\TechStackTile\Commands\FetchTechStackCommand::class,
+```
+
+
+Insert this in routes/web.php - this enables the manual-refresh-button in tile
+``` bash
+Route::get('/refresh-tech-stack', function() {
+  Artisan::call('dashboard:fetch-tech-stack-data');
+  return back();
+})->name('fetch-tech-stack');
 ```
 
 ## Testing
