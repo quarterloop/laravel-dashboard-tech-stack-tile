@@ -5,6 +5,7 @@ namespace Quarterloop\TechStackTile\Commands;
 use Illuminate\Console\Command;
 use Quarterloop\TechStackTile\Services\TechStackAPI;
 use Quarterloop\TechStackTile\TechStackStore;
+use Session;
 
 class FetchTechStackCommand extends Command
 {
@@ -18,7 +19,7 @@ class FetchTechStackCommand extends Command
         $this->info('Fetching tech stack data ...');
 
         $techStack = $tech_stack_api::getTechStack(
-            config('dashboard.tiles.tech_stack.url'),
+            Session::get('website'),
             config('dashboard.tiles.tech_stack.key'),
         );
 
